@@ -1,0 +1,127 @@
+\section{Фундаментальное решение оператора теплопроводности}
+Мы доказывали, что вот такая вот формула
+\[
+  \E(x,t) = \frac{\theta(t)}{(2a\sqrt{\pi t})^n}e^{\frac{-|x|^2}{4a^2t}}
+\]
+является фундаментальным решением оператора теплопроводности $\CP{}t - a^2\Delta$. Что мы с вами получили:
+\[
+  \int\limits_\e^\infty \Gint{B_R}\frac{e^{-\frac{|x|^2}{4a^2t}}}{(2a\sqrt{\pi t})^n}(\phi_t + a^2\Delta\phi)\,dx\,dt = 
+  - \Gint{B_R}\frac{e^{-\frac{|x|^2}{4a^2\e}}}{(2a\sqrt{\pi \e})^n}\phi(x,\e)\,dx + 
+    \int\limits_0^\e\Gint{B_R}(\dl_t-a^2\Delta) \frac{e^{-\frac{|x|^2}{4a^2t}}}{(2a\sqrt{\pi t})^n}\phi\,dx\,dt.
+\]
+Теперь надо посчитать, во что это всё превратится, когда мы $\e$ устремим к нулю. Первое, что хочу заметить: последнее слагаемое при $t>0$
+\[
+\int\limits_0^\e\Gint{B_R}(\dl_t-a^2\Delta) \frac{e^{-\frac{|x|^2}{4a^2t}}}{(2a\sqrt{\pi t})^n}\phi\,dx\,dt = 0.
+\]
+Непосредственным дифференцированием в этом можно убедиться. Если угодно, это будет упражнение на дом. Уж очень громозкого выражения вы не получите.
+
+В то же время под интегралом
+\[
+  \Gint{B_R}\frac{e^{-\frac{|x|^2}{4a^2\e}}}{(2a\sqrt{\pi \e})^n}\phi(x,\e)\,dx
+\]
+сделаю вот такую замену: $y = \frac x{2a\sqrt t}$, $dx = (2a\sqrt t)^n\,dy$. Как при этом преобразуется интеграл?
+\[
+  \Gint{B_R}\frac{e^{-\frac{|x|^2}{4a^2\e}}}{(2a\sqrt{\pi \e})^n}\phi(x,\e)\,dx = 
+  \frac 1{\pi^{n/2}}\Gint{\R^n}e^{-|y|^2}\phi\big( (2a\sqrt\e)^ny,\e\big)\,dy
+\]
+Что можно сказать про функцию $\phi$? Это функция из $\D(\R^{n+1})$. Значения $\phi\big( (2a\sqrt\e)^ny,\e\big)\to\phi(0)$ при $\e\to0$. А~вот к чему стремится по теореме Лебега об ограниченной сходимости всё выражение (есть мажоранта, ведь у $\phi$ на компакте есть наибольшее значение)
+\[
+  \frac 1{\pi^{n/2}}\Gint{\R^n}e^{-|y|^2}\phi\big( (2a\sqrt\e)^ny,\e\big)\,dy \to
+  \frac 1{\pi^{n/2}} \Gint{\R^n}e^{-|y|^2}\phi(0)\,dy = \frac{\phi(0)}{\pi^{n/2}}\Gint{\E^n} e^{-|y|^2}\,dy = \phi(0).
+\]
+
+Таким образом (вспомним, с чего начиналось наше рассуждение)
+\[
+  (\Delta\E,\phi) = \yo\e0\int\limits_\e^\infty\Gint{B_R}\frac{e^{\frac{-|x|^2}{4a^2t}}}{(2a\sqrt{\pi t})^n}(\phi_t+a^2\Delta\phi) = \phi(0)
+\]
+или, другими словами $\Delta\E = \delta(x)$.
+
+\section{Волновой оператор}
+Разберёмся сначала с одномерным случаем.
+\begin{The}
+  Пусть $\E(x,t) = \frac1{2a}\theta(at - |x|)$, где $\heviside$ "--- тэта-функция Хевисайда, $a>0$. Тогда
+\[
+  (\dl_t^2 - a^2\dl^2_x)\E(x,t) = \delta(x,t),
+\]
+то есть $\e(x,t)$ "--- фундаментальное решение одномерного волнового оператора $\wave_a = (\dl_t^2 - a^2\dl^2_x)$.
+\end{The}
+\begin{Proof}
+  Сделаем так, как вы привыкли делать на семинаре. Разложим на множители.
+\[
+\wave_a = \dl_t^2 - a^2\dl^2_x = (\dl_t - a\dl_x)(\dl_t+a\dl_x).
+\]
+Для тех, кому это в новинку, всегда можно рассмотреть алгебру, порождённую данными операторами $\dl_t^2$ и $\dl_x^2$ и тождественным (всевозможные линейные комбинации и композиции) и рассматривать умножение операторов, как композицию. Алгебра получается коммутативной.
+
+Теперь хотим сделать линейную замену переменных, такую, что $\dl_\xi = \dl_t + a\dl_x$, $\dl_\eta=\dl_t-a\dl_x$. Ищем $x = x(\xi,\eta)$ и $t = t(\xi,\eta$, такие, что
+\[
+  \CP{}\xi = \underbrace{\CP t\xi}_1\CP{}t + \underbrace{\CP x\xi}_a\CP{}x,\quad
+  \CP{}\eta = \underbrace{\CP t\eta}_1\CP{}t + \underbrace{\CP x\eta}_{-a}\CP{}x
+\]
+Здесь сомнений нет: $x = a\xi - a_\eta$, $t = \xi+\eta$. Обратные выражения к ним
+\[
+  \xi = \frac{x+at}{2a};\quad \eta = \frac{-x+at}{2a};\quad \Big\|\CP{(\xi,\eta)}{(x,t)}\Big\|=
+  \begin{pmatrix}
+    \frac1{2a} & \frac12\\
+    -\frac1{2a} &\frac12
+  \end{pmatrix}.
+\]
+ Во что превратится уравнения после такой замены?
+\[
+  \dl_\eta\dl_\xi\E\big(x(\xi,\eta),t(\xi,\eta)\big) = \delta\big(x(\xi,\eta),t(\xi,\eta)\big).
+\]
+Уравнения достаточно простое получилось, я лишь хочу понять, что из себя представляет  вот эта $\delta$. Согласно формуле замены переменных у обобщённой функции получим следующее
+\[
+  \Big(\delta\big(x(\xi,\eta),t(\xi,\eta)\big),\psi(\xi,\eta)\Big) = 
+  \Bigg(\delta(x,t),\psi\big(\xi(x,t),\eta(x,t)\big)\bigg|\det\Big\|\CP{(\xi,\eta)}{(x,t)}\Big\|\bigg|\Bigg)=
+  \frac1{2a}\phi(0),
+\]
+то есть $\delta\big(\xi(x,t),\eta(x,t)\big) = \frac1{2a}\delta(\xi,\eta) = \frac1{2a}\delta(\xi)\delta(\eta)$. Тем самым будем иметь
+\[
+  \dl_\eta\dl_\xi\E\big(x(\xi,\eta),t(\xi,\eta)\big) = \frac1{2a}\delta(\xi)\delta(\eta).
+\]
+Несложно увидеть, что функция
+\[
+  \E\big(x(\xi,\eta),t(\xi,\eta)\big) = \frac1{2a}\theta(\xi)\theta(\eta)
+\]
+является решением последнего уравнения (разумно искать решение в виде прямого произведения, подставляем убеждаемся).
+
+Осталось сделать обратную замену.
+\[
+  \E(x,t) = \frac1{2a}\theta\left(\frac{x+at}{2a}\right)\theta\left(\frac{-x+at}{2a}\right) = 
+\]
+должно быть $x+at >0$ и $-x+at>0$. Это имеет место тогда и только тогда, когда $|x|<at$. Тогда имеем
+\[
+  = \frac1{2a} \theta(at - |x|)
+\]
+Что и требовалось доказать.
+\end{Proof}
+
+Далее получим результат для трёхмерного случая, а из него уже получим для двумерного. Для двумерного вычисления очень громоздкие.
+\begin{The}
+  Пусть $\E(x,t) = \frac{\theta(t)}{4\pi a^2 t}\delta_{S_{at}}(x),\pau x = (x_1,x_2,x_3)$, где
+\[
+  (\delta_{S_r},\phi) = \int\limits_{S_r}\phi\,dS,\pau \phi\in D(\R^3).
+\]
+Тогда $\wave_a\E(x,t) = (\dl^2_t - a^2\Delta)\E(x,t) = \delta(x,t)$, то есть $\E(x,t)$ есть фундаментальное решение трёхмерного волнового оператора.
+\end{The}
+\begin{Proof}
+  Пусть $\phi\in\D(\R^n)$ и честно её продифференцируем согласно определению. При перебрасывании производной чётного порядка знак не выносится.
+\[
+  \big(\wave_a\E(x,t),\phi) = \big(\E(x,t),\wave_a\phi\big) = 
+  \int\limits_0^\infty \frac{dt}{4\pi a^2 t}\Gint{S_{at}}\wave_a\phi\,dS = 
+\]
+Получили уже что-то похожее на цель, но не совсем. Обозначим $r=at$, $dt = dr/a$. Я хочу воспользоваться формулой интегрирования с сферических координатах. 
+\[
+  = \frac1{4\pi a^2}\int\limits_0^\infty \frac{dr}r\Gint{S_r}\wave_a\phi\,dS = 
+  \frac1{4\pi a^2}\int\limits_0^\infty\frac{dr}r\Gint{S_r}\CP{^2\phi}{t^2}dS - 
+    \frac1{4\pi}\int\limits_0^\infty\frac{dr}r\Gint{S_r}\Delta\phi\,dS = 
+\]
+Теперь сделаем замену $t$ на $r$ в функции $\phi$. Имеем $\CP{^2\phi}{t^2} = \CP{^2\phi}{r^2} a^2$. Под интегралом по сфере всюду $|x| = r$,
+\[
+  \frac1{4\pi}\int\limits_0^\infty\frac{dr}r\Gint{S_r}\CP{^2\phi}{r^2}\,dS - 
+   \frac1{4\pi}\int\limits_0^\infty\frac{dr}r\Gint{S_r}\Delta\phi\,dS = 
+  \frac1{4\pi}\Gint{\R^3}\frac{\phi_{rr}(x,r/a)}{|x|}\bigg|_{r=|x|}\,dx - 
+   \frac1{4\pi}\Gint{\R^3}   \frac{\Delta_x\phi(x,r/a)}{|x|}\bigg|_{r=|x|}\,dx
+\]
+Дальше мы должны будем избавляться от $r$.
+\end{Proof}
