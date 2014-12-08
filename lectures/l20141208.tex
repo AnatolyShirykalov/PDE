@@ -1,0 +1,124 @@
+\section{8 декабря 2014}
+Мы исследуем выражение $\E_3(x,t) = \frac{\theta(t)}{4\pi a^2 t}\delta_{S_{at}}(x),\pau x = (x_1,x_2,x_3)$. Мы остановились на выражении
+\begin{equation}\label{qw1}
+  \frac1{4\pi}\Gint{\R^3}   \frac{\Delta_x\phi(x,r/a)}{|x|}\bigg|_{r=|x|}\,dx.
+\end{equation}
+Мы используем формулу Грина
+\[
+  \Gint\W\CP u{x_i}\,dx = \Gint{\dl\W} u\cos(\nu,x_i)\,dx,
+\]
+где $\nu$ "--- вектор единичной нормали; из этой формулы Грина в своё время получалась формула интегрирования по частям.
+\[
+  \Gint\W f\CP g{x_i}\,dx = \Gint{\dl \W}fg\cos(\nu,x_i)\,dS - \Gint\W f\CP g{x_i}\,dx.
+\]
+Вот это \eqref{qw1} то же самое или нет? У нас не выполнены условия, будем применять формулу Грина в нашем случае для $u=fg$ и доказывать интегрирование по частям для нашего случая отдельно.
+\[
+  \frac1{4\pi}\Gint{\R^3}   \frac{\Delta_x\phi(x,r/a)}{|x|}\bigg|_{r=|x|}\,dx = 
+  \frac1{4\pi}\yo\e{+0}\Gint{B_R\dd B_\e}\frac{\Delta_x\phi\left(x,\frac ra\right)}{|x|}\bigg|_{r=|x|}\,dx,
+\]
+где $R>0$ настолько велико, чтобы $\supp\phi\subset B_R\times\R$. Такие $R>0$, очевидно, существуют, так как $\supp\phi$ "--- компакт.
+Дальше мы вот что с вами сделаем.
+\[
+  \Gint{B_R\dd B_\e}\frac{\Delta_x\phi\left(x,\frac ra\right)}{|x|}\bigg|_{r=|x|}\,dx = 
+  \Gint{B_R\dd B_\e}\frac1{|x|}\RY i13\CP{^2}{x_i^2}\phi\left(x,\frac ra\right)\bigg|_{r=|x|}\,dx = 
+\]
+дальше выделим полную производную. Что вы при этом получите. Дифференцируете по $x_i$ и дифференцируете по $r$, как сложную функцию
+\[
+  = \Gint{B_R\dd B_\e}\frac1{|x|}\RY i13\left(\CP{}{x_i}\,\CP\phi x_i\left(\CP\phi{x_i}(x,r/a)\Big|_{r=|x|}\right) -
+  \CP{}r\CP\phi{x_i}(x,r/a)\big|_{r=|x|}\CP{|x|}{x_i}\right)\,dx=
+\]
+Дальше я напишу короче. Идея простая: продифференцировали, подставили, продифференцировали, подставили.
+\begin{multline*}
+  =\Gint{B_R\dd B_\e}\frac1{|x|}\RY i13\CP{}{x_i}\left(\CP\phi{x_i}(x,r/a)\big|_{r=|x|}\right)\,dx - 
+  \frac1a\Gint{B_R\dd B_\e}\frac1{|x|}\RY i13\CP{\phi_r}{x_i}(x,r/a)\big|_{r=|x|} = \\
+  =
+  \Gint{\dl(B_R\dd B_\e)}\frac1{|x|}\RY i13\CP\phi{x_i}(x,r/a)\big|_{r=|x|}\cos(\nu,x_i)\,dS -\\
+  -\Gint{B_R\dd B_\e}\RY i13\CP{\phi(x,r/a)}{x_i}\big|_{r=|x|}\CP{}{x_i}\frac1{|x|}\,dx
+  -\frac1a\Gint{B_R\dd B_\e}\frac1{|x|}\RY i13\CP{\phi_r}{x_i}(x,r/a)\CP{|x|}{x_i}\,dx=
+\end{multline*}
+Давайте запись подсократим. Ясно, что вместо сумм можно писать градиенты. Вектор нормали записывается по направляющим косинусам: $\nu = \big(\cos(\nu,x_1),\cos(\nu,x_2),\cos(\nu,x_3)\big)$.
+\begin{multline*}
+  =\Gint{\dl(B_R\dd B_\e)}\frac1{|x|}\CP{\phi(x,r/a)}{\nu_x}\bigg|_{r=|x|}\,dS - 
+  \Gint{B_R\dd B_\e}\nabla_x\phi(x,r/|x|)\nabla\frac1{|x|} -
+  \frac1a\Gint {B_R\dd B_\e}\frac1{|x|}\,dx-\\
+  -\Gint{B_R\dd B_\e}\frac1{|x|}\nabla_x\phi_r(x,r/a)\big|_{r=|x|}\nabla|x|\,dx=
+\end{multline*}
+Сделали то же, что и при интегрировании по частям делаем. Дальше нужно окончательно избавиться от производных $\phi$
+\begin{multline*}
+   =\Gint{B_R\dd B_\e}\frac1{|x|}\CP{\phi(x,r/a)}{\nu_x}\bigg|_{r=|x|} - 
+  \Gint{B_R\dd B_\e}\phi(x,r/a)\big|_{r=|x|}\CP{}{\nu}\frac1{|x|}\,dS + \\
+  +
+  \Gint{B_R\dd B_\e}\phi_r(x,r/a)\big|_{r=|x|}\nabla|x|\nabla\frac1{|x|}\,dx + 
+  \Gint{B_R\dd B_\e}\phi(x,r/a)\Delta\frac1{|x|}\,\,dx - \\
+  -
+  \Gint{\dl(B_R\dd B_\e)}\frac1{|x|}\phi_r(x,r/a)\big|_{r=|x|}\CP{|x|}{\nu}\,dS +
+  \Gint{B_R\dd B_\e}\frac1{|x|}\phi_{rr}(x,r/a)\big|_{r=|x|}\nabla|x|\cdot \nabla |x|\,dx + \\
+  +
+  \Gint{B_R\dd B_\e}\phi_r(x,r/a)\big|_{r=|x|}\nabla\frac1{|x|}\cdot\nabla|x|\,dx + 
+  \Gint{B_R\dd B_\e}\frac1{|x|}\phi_r(x,r/a)\big|_{r=|x|}\Delta|x|\,dx.
+\end{multline*}
+Всё, что написано, результат, который легко получить, проделав элементарную процедуру выделения полной производной под интегралом (как интегрирование по частям). Дорога прямая, она вас обязательно приведёт к ответу.
+
+Я теперь должен досчитать все пределы до границы. Первое слагаемое, ясно, что стремится к нулю. Ещё один интеграл по поверхности тоже легко оценивается. Чтобы интеграл не пошёл в ноль, нужно подынтегральное выражение больше нуля. $\CP{|x|}{\nu}$ однородный степени один. В другом слагаемом $\Delta\frac1{|x|} = 0$. Кроме того, $\nabla|x|\cdot\nabla|x| = 1$. Я это всё сосчитаю. Посмотрим слагаемые с интегралами по шаровому слою, содержащие в подынтегральном выражении первую производную
+\[
+  \Gint{B_R\dd B_\e}\phi_r(x,r/a)\big|_{r=|x|}\nabla|x|\nabla\frac1{|x|}\,dx + 
+  \Gint{B_R\dd B_\e}\phi_r(x,r/a)\big|_{r=|x|}\nabla\frac1{|x|}\cdot\nabla|x|\,dx +
+   \Gint{B_R\dd B_\e}\frac1{|x|}\phi_r(x,r/a)\big|_{r=|x|}\Delta|x|\,dx.
+\]
+Что и них подынтегральное выражение
+\[
+  \nabla|x|\nabla\frac1{|x|} + \nabla\frac1{|x|}\nabla|x| + \frac{\Delta|x|}{|x|}.
+\]
+Я хочу показать, что это будет ноль. Попробуем убедиться, что это действительно так. Что такое модуль $|x| = (\Sigma x_i^2)^{\frac12}$. Значит,
+\[
+  \CP{|x|}{x_i} = \frac12 2 x_i\left(\RY i13x_i^2\right)^{-\frac12} = \frac{x_i}{|x|}.
+\]
+Тогда
+\[
+  \CP{}{x_i}\frac1{|x|} = -\frac1{|x|^2}\CP{|x|}{x_i} = -\frac1{|x|^2}\frac{x_i}{|x|}= -\frac{x_i}{|x|^3}.
+\]
+Удивительные вещи. Значит, $\nabla|x|\nabla\frac1{|x|} = \frac{\RY i13x_i^2}{|x|^4} = -\frac1{|x|^2}$. Второе слагаемое, аналогично, $\nabla\frac1{|x|}\nabla|x| = \frac{\Delta |x|}{|\Delta}$. Можно было проще поступит и посчитать в полярных координатах.
+\[
+  \Delta|x| = \left(\CP{^2}{r} + \frac2r\CP{}r\right)r\bigg|_{r=|x|} = \frac2r\big|_{r=|x|} = 2\frac |x|
+\]
+В тогда конечном итоге мы получим $\frac{\Delta|x|}{|x|} = \frac2{|x|}^2$.
+ Таким образом
+\begin{multline*}
+  \Gint{B_R\dd B_\e}\frac{\Delta_x\phi(x,r/a)}{|x|}\bigg|_{r=|x|}=
+  \Gint{B_R\dd B_\e}\frac1{|x|}\CP{\phi(x,r/a)}{\nu_x}\big|_{r=|x|}\,-\\
+ - \Gint{\dl(B_R\dd B_\e)}\phi(x,r/a)\CP{}{\nu}\frac1{|x|}\,dS -
+  \Gint{\dl(B_R\dd B_\e)}\frac1{|x|}\phi_r(x,r/a)\big|_{r=|x|}\CP{|x|}\nu\,dS + 
+  \Gint{B_R\dd B_\e}\frac1{|x|}\phi_{rr}(x,r/a)\big|_{r=|x|}\,dx
+\end{multline*}
+Мне надо $\e$ устремить к нулю.Несложно увидеть, что
+\begin{multline*}
+  \bigg|\Gint{(\dl(B_R\dd B_\e)}\frac1{|x|}\CP{\phi(x,r/a)}{\nu_x}\big|_{r=|x|}\,dS\bigg|=
+  \bigg|\frac1\e\Gint{S_\e}\underbrace{\left|\CP{\phi,r/a)}{\ni_x}\right|_{r=|x|}}_{\le\|\phi\|_{C^1(\R^4)}}\bigg|\,dS\le\\
+  \le \frac{4\pi\e^2}\e\|\phi\|_{c^1(\R^4)}\to 0\pau (\e\to0).
+\end{multline*}
+Аналогично, 
+\begin{multline*}
+  \bigg|\Gint{(\dl(B_R\dd B_\e)}\frac1{|x|}\phi_r(x,r/a)\big|_{r=|x|}\CP{|x|}{\nu}\,dS\bigg|=
+  \frac1\e\Gint{S_\e}\big|\phi_r(x,r/a)\big|_{r=|x|}\cdot\left|\CP{|x|}\nu\right|\,dS\le\frac{4\pi\e^2}\e\|\phi\|_{C^1}(\R^4)
+\end{multline*}
+В то же время $\CP{}{\nu}\frac1{|x|} = \DP{}r\frac1r\big|_{r=|x|} = \frac1{|x|^2} = \frac1{\e^2}$, если $x\in S_3$.
+\begin{multline*}
+  \Gint{\dl(B_R\dd B_\e)}\phi(x,r/a)\big|_{r=|x|}\CP{}{\nu}\frac1{|x|}\,dS = \Gint{S_\e}\phi(x,\e/a)\frac1{\e^2}\,dS =\\
+  = 4\pi\phi(0) + \frac1{\e^2}\Gint{S_\e}\big(\phi(x,\e/a)-\phi(0)\big)\,dS\to4\pi\phi(0)
+\end{multline*}
+при $\e\to0+$, так как
+\[
+  \frac1{\e^2}\Gint{S_\e}\big|\phi(x,\e/a)-\phi(0)\big|\,dS\le \frac{4\pi\e^2}{\e^2}\sup\limits_{x\in S_\e}\big|\phi(x,\e/a)-\phi(0)\big|\to 0
+\]
+при $\e\to0$ ввиду непрерывности $\phi$.
+
+Таким образом,
+\[
+  \yo\e{0+}\Gint{B_R\dd B_D}\frac{\Delta_x\phi(x,r/a)}{|x|}\bigg|_{r=|x|}\,dx = -4\pi\phi(0) + \Gint{ B_r}\frac1|x|\phi_{rr}(x,r/a)\big|_{\e=|x|}\,dx.
+\]
+И мы будем иметь
+\[
+  \big(\wave_a\E_3(x,t),\phi(x,t)\big) = \frac 1{4\pi}\Gint{\R^3}\frac{\phi_{rr}(x,r/a)}{|x|}\bigg|_{r=|x|}\,x - 
+  \frac1{4\pi}\Gint{\R^3}\frac{\Delta_x\phi(x,r/a)}{|x|}\bigg|_{r=|x|}\,dx = \phi(0).
+\]
+То есть $\wave_a\E(x,t) = \delta(x,t)$, что и требовалось доказать.
