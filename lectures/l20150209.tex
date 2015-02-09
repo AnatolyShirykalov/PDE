@@ -1,0 +1,146 @@
+\section{Задача Коши для уравнения теплопроводности}
+Задача Коши для уравнения теплопроводности имеет вид
+\begin{equation}\label{KouchiTaskTemp}
+  \begin{cases}
+     u_t = a^2\Delta u + f(x,t),& x\in\R^n,\ t>0,a=\const>0;\\
+     u(x,0) = u_0(x).
+  \end{cases}
+\end{equation}
+Мы будем понимать обобщённую задачу Коши, как в учебнике Владимирова, то есть решение из класса $\D'(\R^n)$.
+
+Но всё началось с классической задачи.
+\begin{Def}
+  Обозначим за $\M$ множество измеримых функций $f$, таких, что во-первых, 
+\[\forall\ T>0\pau f\in \L_{\infty}\big(\R^N\times[0,T]\big),\]
+и при этом $f=0$ почти всюду на промежутке $\R^n\times(-\infty,0)$
+\end{Def}
+То есть множеством определения является $\R^{n+1}$, они существенно ограничены на любом ограниченном промежутке справа от нуля и эквивалентны нулевой функции на отрицательной полуоси по последнему аргументу.
+
+Сколько нужно гладкостей для решения? Нужно дифферецировать по иксам, по $t$, и нужно выполнение равенства $u(x,0)=u_0(x)$. Вроде бы этого достаточно. Но тут есть такая деталь. В тридцатые годы академик Тихонов заметил, что если рассмотреть задачу $u_t = \Delta u$ и $u(x,0)=0$, то ноль очевидно решение. Но ведь есть и ещё решения нетривиальные. Физически эта ситуация абсурдна, ведь такая задача описывает нагревания бесконечно длинного стержня. Получается, что и без источника тепла стержень может нагреться. Тихонов обратил на это внимание. Как преодолеть эту ситуацию? Мы не будем ловить точность. Мы будем использовать класс $\M$, его достаточно. Ещё, мы потребуем немножно уже класс дифференцирования.
+\begin{Def}
+  Классическим решением задачи Коши \ref{KouchiTaskTemp} называется функция\footnote{По $t$ избыточное требование на дифференцируемость. Но мы будем пользоваться такой устоявшейся подстановкой. Здесь следует обратить внимание, что дифференцируемость требудется на открытом множестве.}
+\[
+  u\in M\cap C^2\big(\R^n\times(0,\infty)\big)\cap C\big(\R^n\times[0,\infty)\big),
+\]
+такая что выполнено\footnote{В классическом смысле дифференцирования, как вас учили на первом курсе.} \eqref{KouchiTaskTemp}.
+\end{Def}
+
+Мы хотим доказывать существование и единственность решения. Это удобнее делать для обобщённых решений. Мы сначала всё для них сделаем, а потом покажем, как это связано с классическими решениями.
+
+Пусть в \eqref{KouchiTaskTemp} $u\in C^{2,1}\big(\R^n\times(0,\infty)\big)\cap
+C\big(\R^n\times[0,\infty)\big)$ (два раза дифференцируема по $x$, один раз по $t$), $f\in C\big(\R^n\cap(0,\infty)\big)$, $u_0\in C(\R^n)$. Положим 
+\[
+  \Til u(x,t) = 
+  \begin{cases}
+    u(x,t),&x\in\R^n,\ t\ge0\\
+    0&,x\in\R^n,t<0.
+  \end{cases}
+\]
+И подставим $\Til u$ в уравнение, производя обобщённое дифференцирование. Для любого $\phi\in\D(\R^{n+1})$ имеем
+\begin{multline*}
+  (\Til u_t - a^2\Delta\Til u,\phi) = 
+  (\Til u,-\phi_t - a^2\Delta\phi) =
+  -\int\limits_{\R^{n+1}}\Til u\,\phi_t\,dx\,dt - 
+  a^2\int\limits_{\R^{n+1}}\Til u\Delta\phi\,dx\,dt = \\
+  = - \int\limits_{\R^n}\int\limits_0^\infty u\,\phi_t\,dt\,dx - 
+    a^2\int\limits_0^\infty\int\limits_{\R^n}u\,\Delta\phi\,dx\,dt=
+    \cmt{Формула у нас такая $\int\limits_a^bh'\,g\,dt = fg\big|_a^b - \int\limits_a^bf\,g'\,dt$}\\
+    = \Gint{\R^n}\bigg(u(x,0)\,\phi(x,0) + \int\limits_0^\infty u_t\,\phi\,dt\bigg)\,dx -
+      a^2\int\limits_0^\infty \Gint{\R^n}\Delta u\,\phi\,dx\,dt = 
+      \Gint{\R^n}u_0(x)\,\phi(x,0)\,dx + 
+      \int\limits_0^\infty\Gint{\R^n}\underbrace{(u_t - a^2\Delta u)}_{=f}\phi\,dx\,dt=\\
+  = \Gint{\R^n}u_0(x)\,\phi(x,0)\,dx
+    + \int\limits_0^\infty\Gint{\R^n} f(x,t)\,\phi(x,t)\,dx\,dt = \\
+ \cmt{запишем это через прямое произведение обощённых функций $u_0(x),\delta(t)$.}\\
+    =\big(u_0(x)\delta(t),\phi(x,t)\big) + 
+    +\big(\Til f(x,t),\phi(x,t)\big)
+\end{multline*}
+где $ \Til f$ "--- локально суммируемая функция, определённая формулой
+\[
+  \Til f(x,t)=\begin{cases}
+    f(x,t),&x\in\R^n,\ t\ge0;\\
+    0,&x\in\R^n,\ t<0.
+  \end{cases}
+\]
+Таким образом,
+\begin{equation}\label{OBOB}
+  \Til u_t - a^2\Delta \Til u = \Til f(x,t) + u_0(x)\,\delta(t).
+\end{equation}
+Вот, что получается из классического решения. Теперь всё готово для того, чтобы дать определение обобщённого решения.
+\begin{Def}
+  Обобщённым решением задачи Коши \eqref{KouchiTaskTemp} называется функция $\Til u\in\M$, удовлетворяющая соотношению \eqref{OBOB}.
+При этом мы предполагаем, что $\Til f\in\M$ и $u_0\in\L_\infty(\R^n)$.
+\end{Def}
+Найти решение уравнения \eqref{OBOB} нам проще, чем решить задачу Коши. Там надо было искать определённый класс гладкости, смотреть, что выполнено начальное условие, ещё были другие требования. Здесь у нас только одно уравнение. Оказывается, что в таком классе решения, если существуют, то единственные. Спрашивается, при каких условиях? Вот при тех, которые мы написали
+\begin{itemize}
+\item $\Til u\in\M$;
+\item $\Til f\in\M$;
+\item $u_0\in\L_\infty(\R^n)$.
+\end{itemize}
+
+Как показать это? У нас метод один: взять фундаментальное решение, доказать, что существует свёртка. Сформулируем результат в виде теоремы.
+\begin{The}
+  Пусть 
+\begin{itemize}
+\item $\Til f\in\M$;
+\item $u_0\in\L_\infty(\R^n)$.
+\end{itemize}
+Тогда обобщённая задача Коши имеет, причём единственное, решение $\Til u\in\M$. Более того, мы можем написать даже формулу, которая позволяет сосчитать обобщённое решение: формула Пуассона
+\begin{equation}\label{OBOBTemp}
+  \Til u(x,t) = \theta(t)\int\limits_0^t\Gint{\R^n}
+    \frac{f(\xi,\tau)}{2\,a\sqrt{\pi(t-\tau)}}
+    e^{-\frac{|x-\xi|^2}{4\,a^2(t-\tau)}}\,d\xi\,d\tau + 
+    \frac{\theta(t)}{(2\,a\sqrt{\pi t})^n}
+    \Gint{\R^n} u_0(\xi)\,e^{-\frac{|x-\xi|^2}{4\,a^2t}}\,d\xi.
+\end{equation}
+Обратите внимание, что все интегралы здесь корректно определены. В любой конечной полосе по $t$ функции $f$ ограничены, значит, первый интеграл сходится.
+\end{The}
+\begin{Proof}
+  Покажем, что существует свёртка $\Til u$
+\[
+  \E(x,t)\star\big(\Til f(x,t)+u_0(x)\,\delta(t)\big),
+\]
+где
+\[
+  \E(x,t) = \frac{\theta(t)}{(2\,a\,\sqrt{\pi\,t})^n}e^{-\frac{|x|^2}{4\,a^2\,t}}
+\]
+есть фундаментальное решение уравнения (или, можно сказать, оператора) теплопроводности. 
+
+В самом деле, пусть $\eta_k\in\D(\R^{2n+2})$, $k=1,2,\dots$ "--- компактное исчерпание единицы. Имеем $\forall\ \phi\in\D(\R^{n+1})$
+\begin{multline*}
+  \yo k\infty
+   \Big(\E(x,t)\big(\Til f(\xi,\tau) +\Til u_0(\xi)\,\delta(\tau)\big),
+        \phi(x+\xi,t+\tau)\,\eta_k(x,t,\xi,\tau)\Big) = \\
+  = \yo k\infty
+   \big(\E(x,t)\Til f(\xi,\tau),\phi(x+\xi,t+\tau)\eta_k(x,t,\xi,\tau)\big) +
+  \yo k\infty
+    \big(\E(x,t)\,\Til u_0(\xi)\,\delta(\tau),\phi(x+\xi,t+\tau)\eta_k(x,t,\xi,\tau)\big).
+\end{multline*}
+Заметим, что $\Til f$ локально суммируемая функция. Значит, следующую скобку можем заменить на интеграл.
+\begin{multline*}
+  \big(\E(x,t)\Til f(\xi\tau),\phi(x+\xi,t+\tau)\eta_k(x,t,\xi,\tau)\big) = \\ =
+  \int\limits_0^\infty
+  \int\limits_0^\infty
+  \Gint{\R^n}
+  \Gint{\R^n}
+  \E(x,t)\Til f(\xi,\tau)\phi(\underbrace{x+\xi}_{y},\underbrace{\vphantom{\xi}t+\tau}_{s})\eta_k(x,t,\xi,\tau)\,dx\,\xi\,dt\,d\tau = \\
+  \cmt{$x=y-\xi$, $t = s-\tau$ "--- простейшая линейная замена. Каждый модуль якобиана единица.}\\
+  = 
+  \Gint{\R^n}
+  \Gint{\R^n}
+  \int\limits_0^\infty
+  \int\limits_0^\infty
+  \E(y-\xi,s-\tau)\Til f(\xi,\tau)\phi(y,s)\eta_k(y-\xi,s-\tau,\xi,\tau)\,ds\,d\tau\,dy\,d\xi = \\
+  = 
+  \Gint{\R^n}
+  \Gint{\R^n}
+  \int\limits_0^\infty
+  \int\limits_0^\infty
+  \frac{\theta(s-\tau) 
+  e^{-\frac{|y-\xi|}{4\,a^2(s-\tau)}}}
+  {(2\,a\,sqrt{\pi(s-\tau)})^n}
+  \Til f(\xi,\tau)\phi(y,s)\eta_k(y-\xi,s-\tau,\xi,\tau)\,ds\,d\tau\,dy\,d\xi=\\
+  \cmt{Может ли $s>\tau$? там мы интегрируем ноль}\\
+  = 
+\end{multline*}
+\end{Proof}
