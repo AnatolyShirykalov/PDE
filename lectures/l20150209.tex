@@ -137,10 +137,154 @@ C\big(\R^n\times[0,\infty)\big)$ (два раза дифференцируема
   \int\limits_0^\infty
   \int\limits_0^\infty
   \frac{\theta(s-\tau) 
-  e^{-\frac{|y-\xi|}{4\,a^2(s-\tau)}}}
-  {(2\,a\,sqrt{\pi(s-\tau)})^n}
+  e^{-\frac{|y-\xi|^2}{4\,a^2(s-\tau)}}}
+  {(2\,a\,\sqrt{\pi(s-\tau)})^n}
   \Til f(\xi,\tau)\phi(y,s)\eta_k(y-\xi,s-\tau,\xi,\tau)\,ds\,d\tau\,dy\,d\xi=\\
-  \cmt{Может ли $s>\tau$? там мы интегрируем ноль}\\
-  = 
+  \cmt{Может ли $s>\tau$? там мы интегрируем ноль, $\theta=0$ при отрицательных аргументах}\\
+  = \int\limits_0^\infty \Gint{\R^n} \phi(y,s)\,dy\,ds\int\limits_0^\infty\Gint{\R^n}
+  \frac{\theta(s-\tau) 
+  e^{-\frac{|y-\xi|^2}{4\,a^2(s-\tau)}}}
+  {(2\,a\,\sqrt{\pi(s-\tau)})^n}
+  \Til f(\xi,\tau)\eta_k(y-\xi,s-\tau,\xi,\tau)\,d\tau\,d\xi=\\
+\cmt{интегрирование по $\tau$ могу проводить не до $\infty$, а до $s$, но не совсем}
 \end{multline*}
+Перепишем интеграл отдельно
+\begin{multline*}
+  \int\limits_0^\infty \Gint{\R^n}
+  \frac{\theta(s-\tau) 
+  e^{-\frac{|y-\xi|^2}{4\,a^2(s-\tau)}}}
+  {(2\,a\,\sqrt{\pi(s-\tau)})^n}
+  \Til f(\xi,\tau)\eta_k(y-\xi,s-\tau,\xi,\tau)\,d\tau\,d\xi=\\
+  \theta(s)\int\limits_0^s
+  \frac{e^{-\frac{|y-\xi|^2}{4\,a^2(s-\tau)}}}
+  {(2\,a\,\sqrt{\pi(s-\tau)})^n}
+  f(\xi,\tau)\,\eta_k(y-\xi,s-\tau,\xi,\tau)
+\,d\xi\,d\tau\to\\
+  \to \theta(s)\int\limits_0^s
+  \frac{e^{-\frac{|y-\xi|^2}{4\,a^2(s-\tau)}}}
+  {(2\,a\,\sqrt{\pi(s-\tau)})^n}
+  \Til f(\xi,\tau)\,d\xi\,d\tau
+\end{multline*}
+по теореме Лебега об ограниченной сходимости. ($\theta(s)$ появилась чисто формально, чтобы при $s<0$ точно получился ноль, ведь $\int\limits_0^s$ при отрицательных $s$ определён и не обязан быть нулём.)
+
+Давайте покажем, что теорема об ограниченной сходимости здесь действительно применима, то есть укажем мажоранту.
+\begin{multline*}
+  \int\limits_0^s\Gint{\R^n}
+  \frac{e^{-\frac{|y-\xi|^2}{4\,a^2(s-\tau)}}}
+  {(2\,a\,\sqrt{\pi(s-\tau)})^n}
+  \underbrace{\big|\Til f(\xi,\tau)\big|}_{\Til f\in\L_\infty(\R^n\times(0,s))}
+  \big|\eta_k(y-\xi,s-\tau,\xi,\tau)\big|\,d\xi\,d\tau\le
+  \const\int\limits_0^s\Gint{\R^n}
+  \frac{e^{-\frac{|y-\xi|^2}{4\,a^2(s-\tau)}}}
+  {(2\,a\,\sqrt{\pi(s-\tau)})^n}\,d\xi\,d\tau = \\
+  \left\{
+     \begin{matrix}
+	\zeta = \frac{y-\xi}{2\,a\,\sqrt{s-\tau}}\\
+	\xi = -2a\,\sqrt{s-\tau}\,\zeta + y\\
+	d\zeta = 2\,a\big(2\,a\sqrt{s-\tau}\big)^n\,d\zeta
+     \end{matrix}
+  \right\}=
+\cmt{это всё векторные выражения, якобиан считаем}\\
+  =\frac1{\pi^{n/2}}\int\limits_0^s\underbrace{\Gint{\R^n}
+    e^{-|\zeta|^2}\,d\zeta}_{<\infty}\,d\tau.
+\end{multline*}
+Теперь я могу написать то, чего и хотел
+\begin{multline*}
+  =
+   \left(\theta(s)\int\limits_0^s\Gint{\R^n}
+  \frac{e^{-\frac{|y-\xi|^2}{4\,a^2(s-\tau)}}}
+  {(2\,a\,\sqrt{\pi(s-\tau)})^n}
+  f(\xi,\tau)\,\eta_k(y-\xi,s-\tau,\xi,\tau)\,d\xi\,d\tau,\phi(y,s)
+  \right)\\
+\end{multline*}
+Мы получили с точностью до обозначений первое слагаемое формулы Пуассона. Всё остальное будет точно так же.
+
+Сейчас второе слагаемое получим. Со вторым слагаемым связано более озорное выражение, там есть некая функция, которая не является локально суммируемой.
+
+Слово Россия было впервые написано греческим
+\[
+ \rho\w\sigma \iota\alpha\zeta
+\]
+А русские первые князья говорили на староскандинавском. И вот эти греческие договоры написаны на старостандинавском и на греческом. Происхождение слова «собака» до сих пор гадают.
+
+\[
+  \Big(\E(x,t)\star \big(u_0(x)\delta(t)\big),\phi(x,t)\Big) = 
+  \yo k\infty\big(\E(x,t)\,u_0(\xi)\delta(\tau),\eta_k(x,t,\xi,\tau)\,
+  \phi(x+\xi,t+\tau)\big).
+\]
+Надо доказать, что предел существует для любого компактного исчерпания единицы.  Нужно просто вспомнить определение прямого произведения. Нужно избавиться от $\delta$-функции. Умножения идут справа налево.
+\begin{multline*}
+  \Big(\E(x,t)\star \big(u_0(x)\delta(t)\big),\phi(x,t)\Big) = 
+  \yo k\infty\big(\E(x,t)\,u_0(\xi)\delta(\tau),\eta_k(x,t,\xi,\tau)\,
+  \phi(x+\xi,t+\tau)\big) = \\
+  = \bigg(\E(x,t),
+  \Big(u_0(\xi),\big(\delta(\tau),\eta_k(x,t,\xi,\tau)\phi(x+\xi,t+\tau)\big)\Big)\bigg)=\\
+  = \Big(\E(x,t),\big( u_0(\xi),\eta_k(x,t,\xi,0)\phi(x+\xi,t)\big)\Big)=
+  \bigg(\E(x,t),\Gint{\R^n} u_0(\xi)\,\eta_k(x,t,\xi,0)\phi(x+\xi,t)\,d\xi\bigg)=\\
+\cmt{вспоминаем, что такое $\E(x,t)$. Ещё один интеграл будет, где вместо $\theta$ интегрируем от $0$ до $+\infty$}\\
+  = \int\limits_0^\infty\Gint{\R^n}\frac{e^{-\frac{|x|^2}{4\,a^2\,t}}}{(2\,a\,\sqrt{\pi\,t})^n}\,dx\,dt
+   \Gint{\R^n} u_0(\xi)\,\eta_k(x,t,\xi,0)\phi(x+\xi,t)\,d\xi=\\
+\cmt{Моё искуство состоит только в том, как правильно расставить интегралы}\\
+\left\{
+  \begin{matrix}
+    y = x+\xi\\
+dx = dy\\
+x = y-\xi
+\end{matrix}
+  \right\}=\\
+=
+\int\limits_0^\infty
+\Gint{\R^n}\Gint{\R^n}
+\frac{e^{-\frac{|y-\xi|^2}{4\,a^2\,t}}}{(2\,a\,\sqrt{\pi\,t})^n}
+u_0(\xi)
+\eta_k(y-\xi,t,\xi,0)
+\phi(y,t)\,d\xi\,dy\,dt\to
+  \int\limits_0^\infty\Gint{\R^n}\phi(y,t)\,dy\,dt\Gint{\R^n}
+\frac{e^{-\frac{|y-\xi|^2}{4\,a^2\,t}}}{(2\,a\,\sqrt{\pi\,t})^n}
+u_0(\xi)\,d\xi=
+\end{multline*}
+Я снова хочу применить (применил) теорему Лебега об ограниченной сходимости. В чём отличие от предыдущего случая? Один интеграл берётся по $t$, один по $y$, один по $\xi$. По $y$ и $t$ интегрируем по компактам-проекциям носителей на области изменения переменной интегрирования. Нужно при фиксированном $y$ и $t$ оценить интеграл по $\xi$.
+Сделаем ещё один шаг в цепочки равенств, а потом я дам ещё один комментарий по поводу применения теоремы об ограниченной сходимости.
+\[
+  \bigg(\frac{\theta(t)}{(2\,a\,\sqrt{\pi\,t})^n}\Gint{\R^n}e^{-\frac{|y-\xi|^2}{4\,a^2\,t}}\,u_0(\xi)\,d\xi,\phi(y,t)\bigg)
+\]
+Это есть ни что иное, как второе слагаемое в формуле Пуассона.
+
+А теперь покажем, как предельный переход осуществили, применяя теорему Лебега об ограниченной сходимости. Мы должны взять всё подынтегральное выражение и построить для него мажоранту. То, что вот это всё сходится почти всюду вот к тому, что у вас получается, когда $\eta_k$ выбросите, значит, нет никаких сомнений. Это просто следует из того, что $\eta_k$ "--- это компактное исчерпание единицы. Давайте построим мажоранту, то есть функцию, которая от $k$ не зависит.
+\begin{multline*}
+  \int\limits_0^\infty\Gint{\R^n}\Gint{\R^n}
+  \frac{e^{-\frac{|y-\xi|^2}{4\,a^2\,t}}}{(2\,a\,\sqrt{\pi\,t})^n}\,
+  \underbrace{\big|u_0(\xi)\big|}_{\in\L_\infty(\R^n)}\,
+  \underbrace{\big|\phi(y,t)\big|}_{\in\D^{n+1}}\,
+  \underbrace{\big|\eta_k(y-\xi,t,\xi,0)\big|}_{\text{комп.\,исч.\,ед.}}
+  \,d\xi\,dy\,dt\le\\
+\le \const\Gint{\supp\phi}dy\,dt\Gint{\R^n}
+\frac{e^{-\frac{|y-\xi|^2}{4\,a^2\,t}}}{(2\,a\,\sqrt{\pi\,t})^n}\,d\xi=\\
+\left\{
+\begin{matrix}
+  \zeta = \frac{y - \xi}{2\,a\,\sqrt t}\\
+  \xi = y - 2\,a\,\sqrt t\,\zeta\\
+  d\xi = (2\,a\,\sqrt t)^n\,d\zeta
+\end{matrix}
+\right\}\le\\
+\const\Gint{\supp \phi}\,dy\,dt\Gint{\R^n}e^{-|\zeta|^2}\,\zeta<\infty.
+\end{multline*}
+Таким образом, в качестве мажоранты в теореме Лебега об ограниченной сходимости возьмём
+\[
+  F(y,\xi,t) = \const\chi_{\supp\phi}(y,t)\frac{e^{-\frac{|y-\xi|^2}{4\,a^2\,t}}}{(2\,a\,\sqrt{\pi\,t})^n}.
+\]
+Тем самым получили мы формулу Пуассона.
+
+
+Надо показать, что функция, определяемая формулой Пуассона, лежит в классе $\M$. Очевидно
+\[
+  u(x,t) = \theta(t)\int\limits_0^t\Gint{\R^n}\frac{f(\xi,\tau)}{(2\,a\,\sqrt{\pi(t-\tau)})^n} e^{-\frac{|x-\xi|^2}{4\,a^2(t-\tau)}}\,d\xi\,d\tau + 
+  \frac{\theta(t)}{(2\,a\,\sqrt{\pi\,t})^n}\Gint{\R^n} u_0(\xi)
+  e^{-\frac{|x-\xi|}{4\,a^2\,t}}\,d\xi\in\M.
+\]
+
+Это останется в качестве упражнения. Делается с помощью той же заменой, что и оценки для теореме об ограниченной сходимости, но здесь нужно доказть, что $u\in\L_\infty\big(\R^n\times(0,T)\big)$ для любого $0<T<\infty$. Воспользуйтесь заменой
+\[
+  \zeta = \frac{x-\xi}{2\,a\,\sqrt{t-\tau}};\qquad \zeta = \frac{x-\xi}{4\,a\,\sqrt t}.
+\]
 \end{Proof}
