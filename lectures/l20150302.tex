@@ -1,0 +1,98 @@
+\section{2 Марта}
+Чтобы обобщённое решение стало классическим требуется некоторое дополнительное условие.
+\begin{The}
+  Пусть $g\in C^2\big(\R^n\times[0,\infty)\big)$, все производные $\dl^\a f\in\M$, $|\a|\le 2$, $\a = (\a_1,\dots,\a_n,\a_{n+1})$ "--- мультииндекс, $u_0\in C(\R^n)\cap\L_\infty(\R^n)$. Тогда задача Коши
+\begin{equation}\label{LapKo}
+\begin{cases}
+u_t = a^2\,\Delta u + f(x,t),&x\in\R^n,\ t>0,\\
+u(x,0) = u_0(x)
+\end{cases}
+\end{equation}
+имеет, причём единственное, решение $u\in C^2\big(\R^n\times(0,\infty)\big)\cap\big(\R^n\times[0,\infty)\big)$ (так называемое классическое решение). Это решение выражается формулой Пуассона (мы уже писали, но сейчас будет некоторый нюанс)
+\begin{equation}\label{LapKo2}
+  u(x,t) = 
+    \underbrace{
+\int\limits_0^t\Gint{\R^n}\frac{f(\xi,\tau)}{\left(2\,a\,\sqrt{\pi(t-\tau)}\right)^n}\,e^{-\frac{|x-\xi|^2}{4\,a^2\,(t-\tau)}}\,d\xi\,d\tau
+}_{I_1(x,t)} + 
+    \underbrace{\frac1{\left(2\,a\,\sqrt{\pi\,t}\right)^n}\Gint{\R^n}\,e^{-\frac{|x-\xi|^2}{4\,a^2\,t}}\,d\xi}_{I_2(x,t)}.
+\end{equation}
+\end{The}
+\begin{Proof}
+Согласно предыдущей теореме, задача Коши \eqref{LapKo} имеет единственное обобщённое решение, которое выражается формулой Пуассона для обобщённого решения, совпадающей с \eqref{LapKo2} при $t>0$. Нужно доказать, что получаемое решение имеет нужный класс гладкости.
+
+Пусть $\Til u$ "--- обобщённое решение задачи Коши для уравнения теплопроводности. При этом $\Til u$ задаётся формулой
+\[
+  \Til u(x,t) =\theta(t)
+    \int\limits_0^t\Gint{\R^n}\frac{f(\xi,\tau)}{\left(2\,a\,\sqrt{\pi(t-\tau)}\right)^n}\,e^{-\frac{|x-\xi|^2}{4\,a^2\,(t-\tau)}}\,d\xi\,d\tau + 
+    \frac1{\left(2\,a\,\sqrt{\pi\,t}\right)^n}\Gint{\R^n}\,e^{-\frac{|x-\xi|^2}{4\,a^2\,t}}\,d\xi.
+\]
+Если все нужные производные обобщённого решение можно посчитать в классическом смысле, то это всё равно что классическое решение обобщённого решение можно посчитать в классическом смысле, то это всё равно что классическое решение. Функция $\Til u$ удовлетворяет уравнению
+\[
+  \Til u_t = a^2\,\Delta\Til u + \Til f(x,t) + u_0(x)\,\delta(t).
+\]
+Покажем, что правая часть \eqref{LapKo2} принадлежит классу $C^2\big(\R^n\times(0,\infty)\big)\cap C(\R^n\times[0,\infty)\big)$. Покажем сначала, что $I_1\in C\big(\R^n\times[0,\infty)\big)$. Пусть $(x,t)\in\R^n\times[0,\infty)$. Покажем что $I_1$ непрерывно в точке $(x,t)$. Имеем
+\[
+  \big|I_1(x,t) - I_1(x_0,t_0)\big| =
+  \bigg|
+    \int\limits_0^t
+    \Gint{\R^n}\frac{f(\xi,\tau)}{\left(2\,a\,\sqrt{\pi(t-\tau)}\right)^n} e^{-\frac{|x-\xi|^2}{4\,a^2\,(t-\tau)}}\,d\xi\,d\tau
+    -\int\limits_0^{t_0}
+    \Gint{\R^n}\frac{f(\xi,\tau)}{\left(2\,a\,\sqrt{\pi(t-\tau)}\right)^n} e^{-\frac{|x_0-\xi|^2}{4\,a^2\,(t_0-\tau)}}\,d\xi\,d\tau.
+\]
+Имеем
+\begin{multline*}
+ I_1(x,t) = 
+\int\limits_0^t\Gint{\R^n}\frac{f(\xi,\tau)}{\left(2\,a\,\sqrt{\pi(t-\tau)}\right)^n}\,e^{-\frac{|x-\xi|^2}{4\,a^2\,(t-\tau)}}\,d\xi\,d\tau
+= \left\{
+  \begin{matrix}
+  y = \frac{x-\xi}{2\,a\,\sqrt{t-\tau}}\\
+  \xi = x-2\,a\,\sqrt{t-\tau}\,y\\
+  d\xi = \left(2\,a\,\sqrt{t-\tau}\right)^n\,dy
+  \end{matrix}\right\}=\\=
+  \frac1{\pi^{n/1}}\int\limits_0^t\Gint{\R^n} f(x-2\,a\,sqrt{t-\tau}y,\tau)e^{-|y|^2}\,dy\,\tau = 
+  \left\{\begin{matrix}
+    z = t-\tau\\
+    d\tau = -dz
+\end{matrix}\right\} =
+   \frac1{\pi^{n/2}}\int\limits_0^t \Gint{\R^n}f(x-2\,a\,\sqrt z\,y,t-z)e^{-|y|^2}\,dy\,dz.
+\end{multline*}
+Вернёмся к оценке разности
+\[
+   \big|I_1(x,t)-I_1(x_0,t_0)\big| = 
+   \frac1{\pi^{n/2}}\bigg|
+   \int\limits_0^t \Gint{\R^n}f(x-2\,a\,\sqrt z\,y,t-z)e^{-|y|^2}\,dy\,dz - 
+   \int\limits_0^{t_0} \Gint{\R^n}f(x-2\,a\,\sqrt z\,y,t_0-z)e^{-|y|^2}\,dy\,dz.
+\]
+  Есть загвоздка, мы интегрируем по $\R^n$, надо посмотреть на экспоненту. Ещё один момент, у нас функция класса $\M$. Разобьём интеграл на два. Сначала будет интегрировать по замкнутому шару, а потом до дополнению (последний интеграл будет маленький, а на компакте мы воспользуемся равномерной непрерывностью). 
+\begin{multline*}
+\int\limits_0^t \Gint{\R^n}f(x-2a\sqrt z\,y,t-z)e^{-|y|^2}\,dy\,dz -
+\int\limits_0^{t_0} \Gint{\R^n}f(x_0-2a\sqrt z\,y,t_0-z)e^{-|y|^2}\,dy\,dz=\\
+=
+\int\limits_{t_0}^t \Gint{\R^n}f(x-2a\sqrt z\,y,t-z)e^{-|y|^2}\,dy\,dz +
+\int\limits_{0}^{t_0} \Gint{\R^n}
+  \big(f(x-2a\sqrt z\,y,t-z)-f(x_0-2a\sqrt z\,y,t_0-z)\big)e^{-|y|^2}\,dy\,dz.
+\end{multline*}
+
+Оценим для некоторого $\e\in(0,1)$ и $|t-t_0|<\e$
+\[
+  \bigg|\int\limits_{t_0}^t\Gint{\R^n}f(x-2a\sqrt zy,t-z)e^{-|y|^2}\,dy\,dz\bigg|\le\underbrace{|t-t_0|}_{<\e}\|f\|_{\L_{\infty}(\R^n\times[0,t_0+1])}\Gint{\R^n}e^{-|y|^2}\,dy<\infty\
+\]
+
+Тогда
+\begin{multline*}
+  \int\limits_0^{t_0}\big|\underbrace{f(x-2a\sqrt z y,t-z)-f(x_0-2a\sqrt z y,t_0-z)}_{g(x,x_0,t,t_0,y,z)}\big|e^{-|y|^2}\,dy\,dz = \\ =
+  \int\limits_0^{t_0}\Gint{B_r}\big|g(x,x_0,t,t_0,y,z)\big|e^{-|y|^2}\,dy\,dz + 
+  \int\limits_0^{t_0}\Gint{\R^n\dd B_r}\big|g(x,x_0,t,t_0,y,z)\big|e^{-|y|^2}\,dy\,dz
+\end{multline*}
+Первый интеграл по равномерной непрерывности, а второй так же, как первое слагаемое, ведь $f$ из $\M$
+  \[\int\limits_0^{t_0}\Gint{\R^n\dd B_r}\big|g(x,x_0,t,t_0,y,z)\big|e^{-|y|^2}\,dy\,dz\le
+  2\,t_0\,\|f\|_{\L_\infty\left(\R^n\times[0,t_0]\right)}\Gint{\R^n\dd B_r}e^{-|y|^2}\,dy
+\]
+А другой интеграл
+\[
+  \int\limits_0^{t_0}\Gint{B_r}\big|g(x,x_0,t,t_0,y,z)\big|e^{-|y|^2}\,dy\,dz\le
+ t_0\sup\limits_{\substack{|x-x_0|<\e\\|t-t_0|<\e\\y\in \ol B_r\\ z\in[0,t_0]}} \big|g(x,x_0,t,t_0,y,z)\big|
+\]
+Зафиксировав $r$ выбираем $\e$. А потом $r\to\infty$.
+\end{Proof}
+
