@@ -1,0 +1,32 @@
+\begin{The}[Правило дифференцирования по параметру]
+  Пусть есть функция $f(x,t)\colon X\times(\l_0-\e,\l_0+\e)\to\R$, где $X$ "--- пространство с мерой $\mu_X$, по которой можно интегрировать. Предположим при этом, что
+\begin{roItems}
+\item $f(x,\l_0)\in\L_1(X)$;
+\item $\CP{ }\l f(x,\l)\in\L_1\big(X\times(-\e+\l_0,\l_0+\e)\big)$. Производная существует почти для всех $(x,\l)\in X\times(-\e+\l_0,\l_0+\e)$.
+\item $f(x,\l)$ абсолютно непрерывна по $\l$ на $[-\e+\l_0,\l_0+\e]$ для почти всех $x\in X$.
+\end{roItems}
+Тогда для почти всех $\l\in(-\e+\l_0,\l_0+\e)$
+\[
+  \CP{ }\l\I[\mu_X]X{f(x,\l)}
+\]
+\end{The}
+\begin{Proof}
+ Из абсолютной непрерывности $f$ имеем
+\[
+  f(x,\l) - f(x,\l_0) = \int\limits_{\l_0}^\l\CP{ }\l f(x,\l)\,d\l.
+\]
+Таким образом,
+\[
+  \Gint Xf(x,\l)\,d\mu_X = 
+  \I[\mu_X]X{f(x,\l_0)} + \Gint X\int\limits_{\l_0}^\l\CP{ }\l f(x,\l)\,d\l\,d\mu_X = 
+  \I[\mu_X]X{f(x,\l_0)} + \int\limits_{\l_0}^\l\I[\mu_X]X{\CP{f(x,\l)}\l}\,d\l.
+\]
+Отсюда немедленно получим
+\[
+  \CP{ }\l\I[\mu_X]X{f(x,\l)} = 
+  \underbrace{\CP{ }\l\I[\mu_X]X{f(x,\l_0)}}_0 + 
+  \CP{ }\l\int\limits_{\l_0}^\l\I[\mu_X]X{\CP{f(x,\l)}\l}\,d\l =
+  \I[\mu_X]X{\CP{f(x,\l)}\l}.
+\]
+Что и требовалось доказать.
+\end{Proof}

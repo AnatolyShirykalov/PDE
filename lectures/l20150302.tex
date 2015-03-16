@@ -94,5 +94,104 @@ u(x,0) = u_0(x)
  t_0\sup\limits_{\substack{|x-x_0|<\e\\|t-t_0|<\e\\y\in \ol B_r\\ z\in[0,t_0]}} \big|g(x,x_0,t,t_0,y,z)\big|
 \]
 Зафиксировав $r$ выбираем $\e$. А потом $r\to\infty$.
+
+Непрерывность $I_1$ мы показали. Покажем непрерывность второго слагаемого, пользуясь фактом $u_0\in \L_\infty(\R^n)\cap C(\R^n)$
+\begin{multline*}
+ I_2(x,t) = \frac1{\left(2\,a\,\sqrt{\pi\,t}\right)^n}\Gint{\R^n}u_0(\xi)\,e^{-\frac{|x-\xi|^2}{4\,a^2\,t}}\,d\xi = \\
+\cmt{Тем же самым способом воспользуемся. Выполним замену}\\
+=\left\{\begin{aligned}
+y&=\frac{x-\xi}{2\,a\,\sqrt{t}}\\
+\xi&=x-2\,a\,\sqrt t\,y\\
+d\xi &= (2\,a\,\sqrt t)^n\,dy
+\end{aligned}\right\}=
+  \frac1{\pi^{n/2}}\Gint{\R^n} u_0(x-2\,a\,\sqrt t\,y)e^{-y^2}\,dy.
+\end{multline*}
+Повторяя предыдущие рассуждения, получим, что $I_2\in\C\big(\R^n\times[0,\infty)\big)$.
+
+А ещё надо доказать, что $I_1,I_2\in\M$. Мы можем написать соответствующую оценку. Класс $\M$ означает ограниченность в каждой конечной полосе. У нас есть суммируемость экспоненты и условия на $u_0$. Например, в случае $I_1(x,t)$
+\begin{multline*}
+I_1(x,t) = \int\limits_0^t\Gint{\R^n}\frac{f(\xi,\tau)}{\left(2\,a\,\sqrt{\pi(t-\tau)}\right)^n}\,e^{-\frac{|x-\xi|^2}{4\,a^2\,(t-\tau)}}\,d\xi\,d\tau = 
+\left\{\begin{aligned}
+y&=\frac{x-\xi}{2\,a\,\sqrt{t-\tau}}\\
+\xi &=x-2\,a\,\sqrt{t-\tau}\,y\\
+d\xi&=(2\,a\,\sqrt{t-\tau})^n\,dy
+\end{aligned}\right\}=\\
+=\frac1{\pi^{n/2}}\int\limits_0^t\Gint{\R^n} f\underbrace{(x-2\,a\,\sqrt{t-\tau}\,y,\tau)}_{\in\M,\text{ т.\,е. }\forall\ T>0\pau f\in\L_\infty\big(\R^n\times[0,T]\big)}e^{-|y|^2}\,dy\,d\tau\le\\\le
+\frac1{\pi^{n/2}}\|f\|_{\L_\infty\big(\R^n\times[0,\infty]\big)}\int\limits_0^t\Gint{\R^n}e^{-|y|^2}\,dy\,d\tau = t\|f\|_{\L_\infty\big(\R^n\times[0,t]\big)}<\infty.
+\end{multline*}
+Аналогично имеем
+\[
+  I_2(x,t) = \frac1{\pi^{n/2}}\Gint{\R^n}u_0(x-2\,a\,\sqrt t\,y)e^{-|y|^2}\,dy\le
+\frac1{\pi^{n/2}}\|u_0\|_{\L_\infty(\R^n)}\Gint{\R^n} e^{-|y|^2}\,dy = \|u_0\|_{\L_\infty(\R^n)}.
+\]
+
+Надо показать теперь дифференцируемость, а именно покажем, что $I_1\in C^2\big(\R^n\times(0,\infty)\big)$. Мы делали замену времени $s = t-\tau$, переставляли пределы интегрирования.
+\[
+ I_1(x,t) = \frac1{\pi^{n/2}}\int\limits_0^t\Gint{\R^n}f(x-2\,a\,\sqrt s\,y,t-s)e^{-|y|^2}\,dy\,ds.
+\]
+Отсюда видно, что
+\[
+  \dl^\a_x I_1(x,t) = \frac1{\pi^{n/2}}\int\limits_0^t\Gint{\R^n}\dl^\a_x f(x-2\,a\,\sqrt s\,y,t-s)e^{-|y|^2}\,dy\,ds,
+\]
+где $\dl^\a_x = \CP{^{|\a|}}{x_1^{\a_1}\dots x_n^{\a_n}}$, $\a = (\a_1,\dots,\a_n)$, $|\a|=\a_1+\dots+\a_n$ и $|\a|\le2$. Предполагается, что вы умеете дифференцировать интеграл с параметром. С существованием производной здесь всё в порядке. Все производные ограничены на ограниченном по времени промежутке. Тогда за счёт экспоненты подынтегральное выражение является суммируемым. Я докажу вам теорему, по которой можно будет дифференцировать этот интеграл по $x$. А по времени получается следущее
+\[
+\dl_t I_1(x,t) =
+ \frac1{\pi^{n/2}}\Gint{\R^n} \underbrace{f(x-2\,a\,\sqrt s\,y,t-s)}_{\in\M}\,e^{-|y|^2}\,dy + 
+  \frac1{\pi^{n/2}}\int\limits_0^t\Gint{\R^n}\dl_t\,\underbrace{f(x-2\,a\,\sqrt s\,y,t-s)}_{\in\M}
+    \,e^{-|y|^2}\,dy\,ds.
+\]
+Далее вторую
+\[
+\dl^2_t I_1(x,t) = 
+  \frac2{\pi^{n/2}}\Gint{\R^n}\dl_t\,\underbrace{f(x-2\,a\,sqrt s\,y,t-s)}_{\in\M}\,e^{-|y|^2}\,dy +
+  \frac1{\pi^{n/2}}\int\limits_0^t\Gint{\R^n}\dl^2_t
+  \underbrace{ f(x-2\,a\,\sqrt s\,y\,t-s)}_{\in\M}\,e^{-|y|^2}\,dy\,ds.
+\]
+Нам здесь нужна гладкость подынтегральной функции порядка два в замыкании области. Иначе при $t=s$ были бы проблемы.
+
+А смешанная производная
+\[
+\dl_x\dl_t I_1(x,t) = \frac1{\pi^{n/2}}\Gint{\R^n}\dl_x f(x-2\,a\,\sqrt s\,y,t-s)\,e^{-|y|^2}\,dy + 
+  \frac1{\pi^{n/2}}\int\limits_0^t\Gint{\R^n}\dl_x\dl_t f(x-2\,a\,\sqrt s\,y,t-a)\,e^{-|y|^2}\,dy\,ds.
+\]
+Все подынтегральные множители экспоненты из класса $\M$.
+
+Таким образом, $I_1\in C^2\big(\R^n\times[0,\infty)\big)$. Аналогично $I_2$.
+\[
+  \dl_{x,t}^\b],I_2(x,t) = \sum\limits_{\substack{\a+\g+\nu=\b\\\a,\g,\nu\in\Z_+}}
+  \dl^\nu\frac1{(2\,a\,\sqrt{\pi\,t})^n}
+  \Gint{\R^n}
+   u_0(\xi)\dl_x^\a \dl_t^\g 
+   e^{-\frac{|x-\xi|^2}{4\,a^2\,t}}
+  \,d\xi.
+\]
+Здесь $\b\le2$. При дифференцировании 
+$  \dl^\nu\frac1{(2\,a\,\sqrt{\pi\,t})^n}$ растёт степень знаменателя. А под интегралом экспонента всё забивает. Как функция от $\xi$
+\[
+   \forall\ t>0,\ \forall\ x\in\R^n\pau 
+   u_0(\xi)\dl_x^\a \dl_t^\g 
+   e^{-\frac{|x-\xi|^2}{4\,a^2\,t}}
+  \in\L_1(\R^n).
+\]
+Видим, что $I_2$ на самом деле бесконечно можно дифференцировать, ведь экспонента всё забивает, любую степень. Но это всё так, пока есть требование гладкости функций из условия до границы.
+
+Тем самым, $I_2\in C^\infty\big(\R^n\times(0,\infty)\big)$. Поэтому $I_1+I_2\in\C^2\big(\R^n\times(0,\infty)\big)\cap C\big(\R^n\times[0,\infty)\big)\cap \M$.
+
+Таким образом, $u(x,t) = I_1(x,t) + I_2(x,t)$ является классическим решением задачи Коши для уравнения теплопроводности. Его единственность вытекает из теоремы единственности обобщённого решения и следующего упражнения.
 \end{Proof}
 
+\begin{Task}
+  Пусть $v,w\in\D'(\R^n)$, причём $v(x)\delta(t) = w(x)\delta(t)$. Тогда $v=w$.
+\end{Task}
+\begin{Solution}
+Возьмём $\phi\in\D(\R^n)$, $\eta\in\D(\R)$. Имеем
+\[
+  \big(v(x)\delta(t),\phi(x)\eta(t)\big) = 
+  \big(w(x)\delta(t),\phi(x)\eta(t)\big).
+\]
+Осюда по определению
+\[
+  \big(v(x),\phi(x)\big)\eta(0) = \big(w(x),\phi(x)\big)\eta(0).
+\]
+Возьмём $\eta\colon \eta(0)\ne0$. Осюда следует, что $\big(v(x),\phi(x)\big) = \big(w(x),\phi(x)\big)$. Значит, $v=w$.
+\end{Solution}
