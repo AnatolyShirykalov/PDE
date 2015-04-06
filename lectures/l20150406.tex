@@ -1,0 +1,94 @@
+\section{Формулы Даламбера, Пуассона и прочие}
+
+Мы доказываем существование и единственность классического решения Задачи Коши. Чуть посложнее чем формула Даламбера, получим формулу Пуассона. Это "--- случай $n=2$.
+Фундаментальное решение волнового оператора в случае $n=2$ имеет вид
+\[
+  \E_2(x,t) = \frac{\theta(at - |x|}{2\pi a\sqrt{a^2t^2-|x|^2}}.
+\]
+Это локально интегрируемая функция. Раз так, все свёртки можно считать, как классические свёртки.
+\begin{multline*}
+  \Til f(x,t)\star\E_2(x,t) = \int\limits_{-\infty}^{+\infty} \Gint{\R^2} \E_2(x-y,t-\theta) \Til f(y,\theta)\,dy\,d\theta = \\=
+  \int\limits_{-\infty}^{+\infty} \Gint{\R^2}\frac{\theta\big(a(t-\theta) -|x-y|\big)\Til f(y,\theta)\,dy\,d\theta }{2\pi a\sqrt{a^2(t-\theta)^2 - |x-y|^2}} = 
+  \frac1{2\pi a}\int\limits_0^{+\infty}\Gint{B_{at}^x} \frac{f(y,\theta)\,dy\,d\theta}{\sqrt{a^2(t-\theta)^2 - |x-y|^2}}.
+\end{multline*}
+
+С первым слагаемым мы разобрались. А как быть со вторым? Мы уже брали компактные исчерпания единицы, мы сейчас результат напишем
+\[
+  \forall\ \phi\in \D(\R^3)\pau 
+  \big(\E_2(x,t)\star u_1(x)\delta(t),\phi(x,t)\big) =
+  \Big(\E_2(x,t) u_1(y)\delta(\theta),
+    \lambda \big(^2t^2 - |x|^2\big)\lambda(t)\lambda(\theta)\phi(x+y,t+\theta)\Big) = 
+\]
+% рисунок $\lambda$
+Здесь $\lambda\in C^{\infty}(\R)$, $\lambda|_{(-\infty,-1)}=0$, $\lambda|_{[-1/2,+\infty)}=1$.
+\begin{multline*}
+= \bigg(\E(x,t),\Big(u_1(x),\delta(t),\lambda\big(a^2t^2-|x|^2\big)\lambda(t)\lambda(\theta)\phi(x+y,t+\theta)\Big)\bigg) =\\
+= \Bigg(\E(x,t),\bigg(u_1(x),\Big(\delta(t),\lambda\big(a^2t^2-|x|^2\big)\lambda(t)\lambda(\theta)\phi(x+y,t+\theta)\Big)\bigg)\Bigg) =\\
+= \bigg(\E_2(x,t),\Big(u_1(y),\lambda\big(a^2t^2 - |x|^2\big)\lambda(t)\phi(x+y,t)\Big)\bigg) = \\
+= \bigg(\E_2(x,t),\Gint{\R^2} u_1(y)\lambda\big(a^2t^2 - |x|^2\big)\lambda(t)\phi(x+y,t)\,dy\bigg) = \\
+= \frac1{2\pi a}\int\limits_{-\infty}^{+\infty}\Gint{\R^2}\Gint{\R^2}
+  \frac{\theta\big(at - |x|\big)}{\sqrt{a^2t^2-|x|^2}}\times
+    u_1(y)\lambda\big(a^2t^2 - |x|^2\big)\lambda(t)\phi(\underbrace{x+y}_{\xi},t)\,dy\,dx\,dt=\\
+= \frac1{2\pi a}\int\limits_{-\infty}^{+\infty}\Gint{\xi\in\R^2}\Gint{B^\xi_{at}}
+  \frac{\theta\big(at - |\xi-y|\big)}{\sqrt{a^2t^2 - |\xi-y|^2}}u_1(y)\lambda\big(a^2t^2 - |\xi-y|^2\big)\lambda(t)\phi(\xi,t)\,dy\,d\xi\,dt=\\
+= \frac1{2\pi a}\int\limits_{-\infty}^{+\infty}\Gint{\R^2}\Gint{\R^2}
+  \frac{\theta(t)u_1(y)}{\sqrt{a^2t^2 - |\xi-y|^2}}\phi(\xi,t)\,dy\,dt=
+  \bigg(\frac{\theta(t)}{2\pi a}\Gint{B^\xi_{at}}
+	\frac{u_1(y)}{\sqrt{a^2t^2 - |\xi-y|^2}}\,dy,\phi(\xi,t)\bigg).
+\end{multline*}
+
+Другими словами, 
+\[
+\E_2(x,t)\star u_1(x,t)\delta(t) = 
+  \frac{\theta(t)}{2\pi a}\Gint{B^\xi_{at}} \frac{u_1(\xi)\,d\xi}{\sqrt{a^2t^2 - |x-\xi|^2}}.
+\]
+
+Это мы получили второе слагаемое. Но есть ещё третье, которое достаточно тривиально
+\[
+  \E_2(x,t)\star u_0(x)\delta'(t) = 
+  \CP{ }t\big(\E_2(x,t)\star u_0(x)\delta(t)\big) = \CP{ }t\frac{\theta(t)}{2\pi a}\Gint{B^x_{at}}
+	\frac{u_0(\xi,t)\,d\xi}{\sqrt{a^2t^2-|x-\xi|^2}}.
+\]
+
+Осталось показать, что эти решения дают достаточно гладкие функции. 
+\begin{multline*}
+ \frac1{2\pi a}\int\limits_0^t\Gint{B^x_{a(t-\tau)}}\frac{f(\xi,\tau)\,d\xi\,d\tau}{\sqrt{a^2(t-\tau)^2 - |x-\xi|^2}} = 
+ \left\{
+  \begin{matrix}
+    \xi\in B_{a(t-\tau)}^x\iff |\xi-x|<a(t-\tau);\\
+    y = \frac{\xi -x}{t-\tau}\pau |y|<a;\\
+   d\xi = (t-\tau)^2\,dy.
+\end{matrix}
+\right\}=\\
+=\frac{(t-\tau)^2}{2\pi a}\int\limits_0^t \Gint{B_a}\frac{f\big(x+(t-\tau)y,\tau\big)(t-\tau)^2\,dy\,d\tau}{\sqrt{a^2(t-\tau)^2-(t-\tau)^2|y|^2}} 
+= \frac1{2\pi a}\int\limits_0^t\Gint{B_a} \frac{f\big(x+(t-\tau)y,\tau\big)(t-\tau)\,dy\,d\tau}{\sqrt{a^2-|y|^2}}.
+\end{multline*}
+
+Корень квадратный "--- это хорошая особенность и она суммируется. Можете и по $t$ и $x$ непрерывно дифференцировать два раза до замыкания. Мы доказали, что это всё принадлежит вот такому классу $C^2\big(\R^2\times[0,+\infty)\big)$. Это более сильное утверждение, чем нам требуется.
+
+Аналогично
+\begin{multline*}
+  \frac1{2\pi a} \Gint{B^x_{at}}\frac{u_1(\xi)\,d\xi}{\sqrt{a^2t^2-|x-\xi|^2}} = 
+  \left\{
+   \begin{matrix}
+     \xi\in B^x_{at}\iff |\xi -x|<at;\\
+     y = \frac{\xi -x}{t};\\
+     \xi = x + ty;\\
+    d\xi = t^2 dy.
+\end{matrix}
+  \right\} = \\
+ = \frac1{2\pi a} \Gint{B_a}\frac{u_1(x+ty)t^2\,dy}{\sqrt{a^2t^2 - t^2|y|^2}} = 
+   \frac t{2\pi a} \Gint{B_a}\frac{u_1(x+ty)}{\sqrt{a^2 - |y|^2}}\in C^2\big(\R^2\times[0,+\infty)\big).
+\end{multline*}
+
+Дифференцируем по времени
+\[
+  \CP{ }t\frac1{2\pi a}\Gint{B_{at}^x} \frac{u_0(\xi)d\xi}{\sqrt{a^2t^2 - |x-\xi|^2}} = 
+  \left\{\begin{matrix}
+    y = \frac{\xi -x}t;\\
+    \xi = x+ty;\\
+    d\xi = t^2\,dy.
+  \end{matrix}
+  \right\} = 
+\frac1{2\pi a}\CP{ }t\Gint{B_a} \frac{t u_0(x+ty)\,dy}{\sqrt{a^2t^2-|y|^2}}\in C^2\big(\R^2\times[0,+\infty)\big).
+\]
